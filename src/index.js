@@ -34,7 +34,10 @@ async function start(fields) {
 
   log('info', 'Save bills')
   return saveBills(bills, fields.folderPath, {
-    linkBankOperations: false
+    linkBankOperations: false,
+    sourceAccount: this.accountId,
+    sourceAccountIdentifier: fields.email,
+    fileIdAttributes: ['vendorRef']
   })
 }
 
@@ -100,7 +103,8 @@ function getBill($el) {
     amount,
     currency,
     fileurl: getInvoiceURL($el),
-    filename: getFilename($el)
+    filename: getFilename($el),
+    vendorRef: getInvoiceNumber($el)
   }
 }
 
