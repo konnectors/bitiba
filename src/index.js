@@ -3,7 +3,8 @@ const {
   requestFactory,
   signin,
   saveBills,
-  log
+  log,
+  utils
 } = require('cozy-konnector-libs')
 const cheerio = require('cheerio')
 const request = requestFactory({
@@ -168,9 +169,12 @@ function getInvoiceNumber($el) {
 }
 
 function getFilename($el) {
-  const dateISO = getDate($el).toISOString()
-  const amount = `${getAmountAndCurrency($el).amount}`.replace('.', '-')
+  const amount = parseFloat(
+    `${getAmountAndCurrency($el).amount}`.replace('.', '-')
+  )
   const invoiceNumber = getInvoiceNumber($el)
 
-  return `${dateISO}_${amount}_${invoiceNumber}.pdf`
+  return `${utils.formatDate(getDate($el))}_bitiba_${amount.toFixed(
+    2
+  )}EUR_${invoiceNumber}.pdf`
 }
