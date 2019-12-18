@@ -3,7 +3,7 @@
   "name": "Bitiba",
   "type": "konnector",
   "language": "node",
-  "icon": "icon.svg",
+  "icon": "icon.png",
   "slug": "bitiba",
   "source": "git@github.com:konnectors/bitiba.git",
   "editor": "Cozy",
